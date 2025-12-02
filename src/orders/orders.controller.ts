@@ -13,6 +13,11 @@ export class OrdersController {
     return this.ordersService.create(createOrderDto, req.user.id);
   }
 
+  @Get('list')
+  findAll(@Request() req) {
+    return this.ordersService.findAll(req.user.id);
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string, @Request() req) {
     return this.ordersService.findOne(id, req.user.id);
