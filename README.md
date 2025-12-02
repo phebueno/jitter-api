@@ -184,8 +184,28 @@ npm run start:prod   # Inicia em modo produção
 npm run build        # Compila o projeto
 npm run seed         # Popula banco com 20 produtos
 npm run test         # Executa testes unitários
+npm run test:cov     # Executa testes com cobertura
 npx prisma studio    # Abre interface visual do banco
 ```
+
+## ✅ Cobertura de Testes
+
+A aplicação possui uma suíte completa de testes unitários para controllers e services:
+
+- **50 testes** implementados
+- **Cobertura de branches**: > 75%
+- **Cobertura de funções**: > 90%
+
+### Módulos Testados
+
+- ✅ **AuthService** - 8 testes (register, login, validateUser)
+- ✅ **AuthController** - 6 testes (endpoints de autenticação)
+- ✅ **ProductsService** - 4 testes (listagem de produtos)
+- ✅ **ProductsController** - 4 testes (endpoints de produtos)
+- ✅ **OrdersService** - 14 testes (CRUD completo com validações)
+- ✅ **OrdersController** - 13 testes (endpoints de pedidos)
+
+Execute `npm run test:cov` para visualizar o relatório completo de cobertura.
 
 ## 🔒 Segurança
 
