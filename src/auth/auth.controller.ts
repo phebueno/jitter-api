@@ -7,10 +7,10 @@ import {
   Request,
 } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
-import { AuthService } from 'src/auth/auth.service';
-import { LoginDto } from 'src/auth/dto/login.dto';
-import { RegisterDto } from 'src/auth/dto/register.dto';
-import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
+import { AuthService } from '@/auth/auth.service';
+import { LoginDto } from '@/auth/dto/login.dto';
+import { RegisterDto } from '@/auth/dto/register.dto';
+import { JwtAuthGuard } from '@/auth/guards/jwt-auth.guard';
 
 @ApiTags('auth')
 @Controller('auth')
