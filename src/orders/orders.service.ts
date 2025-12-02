@@ -80,4 +80,29 @@ export class OrdersService {
       },
     });
   }
+
+  async findOne(orderId: string, userId: string) {
+    const order = await this.prisma.order.findFirst({
+      where: {
+        orderId,
+        userId,
+      },
+      include: {
+        items: {
+          select: {
+            id: true,
+            productId: true,
+            quantity: true,
+            price: true,
+          },
+        },
+      },
+    });
+
+    if (!order) {
+      throw new NotFoundException(`Pedido ${orderId} não encontrado`);
+    }
+
+    return order;
+  }
 }
