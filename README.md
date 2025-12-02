@@ -1,98 +1,198 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# Jitter API
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+API de gerenciamento de pedidos desenvolvida com NestJS, Prisma ORM e PostgreSQL.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## 📋 Sobre o Projeto
 
-## Description
+API RESTful completa para gerenciamento de pedidos, usuários e produtos. O sistema oferece autenticação JWT, validação robusta de dados e documentação interativa via Swagger.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## 🚀 Tecnologias
 
-## Project setup
+- **[NestJS](https://nestjs.com/)** - Framework Node.js progressivo para construção de aplicações server-side
+- **[Prisma ORM](https://www.prisma.io/)** - ORM moderno para TypeScript e Node.js (v7 com adapter-pg)
+- **[PostgreSQL](https://www.postgresql.org/)** - Banco de dados relacional
+- **[Docker](https://www.docker.com/)** - Containerização do banco de dados
+- **[JWT](https://jwt.io/)** - Autenticação e autorização via JSON Web Tokens
+- **[Swagger](https://swagger.io/)** - Documentação interativa da API
+- **[Bcrypt](https://www.npmjs.com/package/bcrypt)** - Hash de senhas
+- **[Class Validator](https://github.com/typestack/class-validator)** - Validação de DTOs
+- **TypeScript** - Tipagem estática
 
-```bash
-$ npm install
+## 📚 Documentação da API
+
+A documentação completa e interativa está disponível via Swagger em:
+
+```
+http://localhost:3000/api
 ```
 
-## Compile and run the project
+### Funcionalidades Disponíveis no Swagger
 
+- 🔐 **Autenticação JWT** - Use o botão "Authorize" para testar rotas protegidas
+- 📝 **Exemplos de Requisições** - Todos os endpoints possuem exemplos práticos
+- ✅ **Testar Endpoints** - Execute requisições diretamente pela interface
+- 📊 **Schemas de Dados** - Visualize a estrutura completa dos DTOs
+
+### Módulos da API
+
+#### Authentication (`/auth`)
+- `POST /auth/register` - Registrar novo usuário
+- `POST /auth/login` - Fazer login e obter token JWT
+- `GET /auth/me` - Obter perfil do usuário autenticado 🔒
+
+#### Products (`/product`)
+- `GET /product/list` - Listar todos os produtos
+
+#### Orders (`/order`)
+- `POST /order` - Criar novo pedido 🔒
+- `GET /order/list` - Listar pedidos do usuário 🔒
+- `GET /order/:id` - Buscar pedido por número 🔒
+- `PATCH /order/:id` - Atualizar pedido (substituição completa) 🔒
+- `DELETE /order/:id` - Deletar pedido 🔒
+
+🔒 = Requer autenticação JWT
+
+## 🛠️ Instalação e Execução
+
+### Pré-requisitos
+
+- Node.js (v18 ou superior)
+- Docker e Docker Compose
+- npm ou yarn
+
+### Passo a Passo
+
+1. **Clone o repositório**
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+git clone https://github.com/phebueno/jitter-api.git
+cd jitter-api
 ```
 
-## Run tests
-
+2. **Instale as dependências**
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+npm install
 ```
 
-## Deployment
+3. **Configure as variáveis de ambiente**
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+Crie um arquivo `.env` na raiz do projeto:
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+```env
+# Database
+POSTGRES_USER=jitter
+POSTGRES_PASSWORD=jitter123
+POSTGRES_DB=jitter_db
+POSTGRES_HOST=localhost
+POSTGRES_PORT=5432
 
-```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+# JWT
+JWT_SECRET=your-super-secret-jwt-key-change-in-production
+JWT_EXPIRES_IN=7d
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+4. **Suba o banco de dados com Docker**
+```bash
+docker compose up -d
+```
 
-## Resources
+5. **Gere o Prisma Client (opcional)**
+```bash
+npx prisma generate
+```
+> Nota: Este passo é executado automaticamente após `npm install` via script postinstall
 
-Check out a few resources that may come in handy when working with NestJS:
+6. **Execute as migrations do Prisma**
+```bash
+npx prisma migrate dev
+```
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+7. **Popule o banco com dados iniciais (opcional)**
+```bash
+npm run seed
+```
 
-## Support
+8. **Inicie a aplicação**
+```bash
+# Modo desenvolvimento (com hot-reload)
+npm run start:dev
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+# Modo produção
+npm run build
+npm run start:prod
+```
 
-## Stay in touch
+A API estará disponível em `http://localhost:3000`
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+## 🗄️ Estrutura do Banco de Dados
 
-## License
+### Modelos
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+- **User** - Usuários do sistema (email, senha hash, nome)
+- **Product** - Produtos disponíveis
+- **Order** - Pedidos realizados (orderId único, valor total, data)
+- **Item** - Itens de cada pedido (produto, quantidade, preço)
+
+### Relacionamentos
+
+- Um usuário pode ter vários pedidos (1:N)
+- Um pedido pertence a um usuário e contém vários itens (1:N)
+- Cada item referencia um produto (N:1)
+
+## 🧪 Testando a API
+
+### Via Swagger (Recomendado)
+
+1. Acesse `http://localhost:3000/api`
+2. Registre um usuário em `POST /auth/register`
+3. Faça login em `POST /auth/login` e copie o `access_token`
+4. Clique no botão **"Authorize"** no topo da página
+5. Cole o token e clique em "Authorize"
+6. Teste as rotas protegidas livremente!
+
+### Via cURL
+
+```bash
+# Registrar usuário
+curl -X POST http://localhost:3000/auth/register \
+  -H "Content-Type: application/json" \
+  -d '{"email":"user@example.com","password":"senha123","name":"João Silva"}'
+
+# Login
+curl -X POST http://localhost:3000/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"email":"user@example.com","password":"senha123"}'
+
+# Criar pedido (substitua YOUR_TOKEN)
+curl -X POST http://localhost:3000/order \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer YOUR_TOKEN" \
+  -d '{
+    "numeroPedido": "v10089016vdb",
+    "valorTotal": 59.98,
+    "dataCriacao": "2025-12-01T10:30:00Z",
+    "items": [
+      {"idItem": "PRODUCT_ID", "quantidadeItem": 2, "valorItem": 29.99}
+    ]
+  }'
+```
+
+## 📦 Scripts Disponíveis
+
+```bash
+npm run start:dev    # Inicia em modo desenvolvimento
+npm run start:prod   # Inicia em modo produção
+npm run build        # Compila o projeto
+npm run seed         # Popula banco com 20 produtos
+npm run test         # Executa testes unitários
+npx prisma studio    # Abre interface visual do banco
+```
+
+## 🔒 Segurança
+
+- Senhas criptografadas com bcrypt
+- Autenticação stateless via JWT
+- Validação de dados em todas as requisições
+- Rotas protegidas com guards
+- Verificação de propriedade de recursos (usuário só acessa seus pedidos)
+
+---
