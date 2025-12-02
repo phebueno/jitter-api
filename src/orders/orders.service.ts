@@ -193,4 +193,18 @@ export class OrdersService {
       },
     });
   }
+
+  async remove(orderId: string, userId: string) {
+    await this.findOne(orderId, userId);
+
+    await this.prisma.item.deleteMany({
+      where: { orderId },
+    });
+
+    await this.prisma.order.delete({
+      where: { orderId },
+    });
+
+    return { message: `Pedido ${orderId} deletado com sucesso` };
+  }
 }
